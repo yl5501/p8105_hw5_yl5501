@@ -1,0 +1,107 @@
+---
+title: "Simple document"
+author: Yujie Li
+date: 2024-09-10 
+output: 
+  html_document:
+    toc: true 
+    toc_float: true 
+   
+output: github_document 
+---
+
+
+```{r, echo = FALSE, message = FALSE}
+library(tidyverse)
+```
+I Loaded necessary packages (e.g. tidyverse)
+
+I'm an R Markdown document! 
+
+# Section 1
+
+Here's a **code chunk** that samples from 
+a _normal distribution_:
+
+```{r}
+samp = rnorm(100)
+length(samp)
+```
+
+# Section 2
+
+I can take the mean of the sample, too!
+The mean is `r mean(samp)`.
+
+
+```{r learning_assessment_1}
+library(tidyverse)
+
+la_df = tibble(
+  norm_samp = rnorm(500, mean = 1),
+  norm_samp_pos = norm_samp > 0,
+  abs_norm_samp = abs(norm_samp)
+)
+
+ggplot(la_df, aes(x = abs_norm_samp)) + geom_histogram()
+
+median_samp = median(pull(la_df, norm_samp))
+```
+
+The median of the variable containing absolute values is 
+`r round(median_samp, digits = 2)`.
+
+```{r}
+la_df = 
+  tibble(
+    norm_samp = rnorm(n = 500, mean = 1),
+    samp_g0 = norm_samp > 0,
+    obs_v_samp = obs(norm_samp)
+  )
+
+  ggplot(la_df, aes(x = abs_norm_samp)) + 
+    geom_histogram()
+```
+
+text formatting 
+------------------------------------------------------------
+
+*italic*  or  _italic_
+**bold**  or  __bold__
+`code`
+superscript^2^ and subscript~2~
+
+
+Headings
+------------------------------------------------------------
+
+# 1st Level Header
+
+## 2nd Level Header
+
+### 3rd Level Header
+
+
+Lists
+------------------------------------------------------------
+
+*   Bulleted list item 1
+
+*   Item 2
+
+    * Item 2a
+
+    * Item 2b
+
+1.  Numbered list item 1
+
+1.  Item 2. The numbers are incremented automatically in the output.
+
+
+Tables 
+------------------------------------------------------------
+
+First Header  | Second Header
+------------- | -------------
+Content Cell  | Content Cell
+Content Cell  | Content Cell
